@@ -33,11 +33,11 @@ public:
   int getN(){
     return n;
   }
-  int *getKeys(){
-    return keys;
+  int getKeys(int index){
+    return keys[index];
   }
-  BTreeNode **getChilds(){
-    return childs;
+  BTreeNode *getChilds(int index){
+    return childs[index];
   }
   bool getLeaf(){
     return leaf;
