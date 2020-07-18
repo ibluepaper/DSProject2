@@ -14,14 +14,14 @@ public:
     n = 0;
     keys = new int[2 * t - 1];
     childs = new BTreeNode *[2 * t];
-    this->leaf = leaf
+    this->leaf = leaf;
   }
 
   void setN(int n){
     this->n = n;
   }
-  void setKeys(int *keys){
-    this->keys = keys;
+  void setKeys(int index, int a){
+    keys[index] = a;
   }
   void setChilds(BTreeNode **childs){
     this->childs = childs;
