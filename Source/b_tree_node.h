@@ -23,8 +23,8 @@ public:
   void setKeys(int index, int a){
     keys[index] = a;
   }
-  void setChilds(BTreeNode **childs){
-    this->childs = childs;
+  void setChilds(int index, BTreeNode *child){
+    childs[index] = child;
   }
   void setLeaf(bool leaf){
     this->leaf = leaf;
