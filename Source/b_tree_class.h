@@ -11,6 +11,7 @@ public:
     root = nullptr;
   }
   void insert(int a);
+  void insert_non_full(BTreeNode *new_root, int a);
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
 };
 
@@ -32,20 +33,37 @@ void BTree::insert(int a){
     //Split root to child_1 and child_2 and make new_root their parents
     split(new_root, 0, root);
 
-    //Find out where we should add "a"
+    //Find out which child of new_root should add "a"
     int i = 0;
     if (new_root->getKeys(0) < a)
       i++;
 
-    //Add "a" to its correct place
-    int i = new_root->getN();
+    //Add "a" to the child
+    insert_non_full(new_root->getChilds[i], a);
 
     //Set new_root as root
     root = new_root;
   }
   //If root is not full add a to the root in right place
   else
+    insert_non_full(root, a);
 
+}
+
+void BTree::insert_non_full(BTreeNode *child, int a){
+  //Set last element place as "i"
+  int i = child->getN() - 1;
+
+  //If the child is leaf add "a" to the correct place in child
+  if (child->getLeaf()){
+    //Shift keys to right of array till "a" is in right place
+    for (; i >= 0 && child->getKeys[i] > a; i--)
+      child->setKeys(i + 1, child->getKeys(i));
+    //Add "a"
+    child->setKeys(i + 1, a);
+    //Increase "n" one number
+    child->setN(child->getN() + 1);
+  }
 }
 
 void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
@@ -78,4 +96,5 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
 
   //Increase new_root full places one number
   new_root->setN(new_root->getN() + 1);
+
 }
