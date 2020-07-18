@@ -15,7 +15,7 @@ public:
 };
 
 void BTree::insert(int a){
-  //If tree is Empty add new Node and add the insertion data to it
+  //If tree is Empty add new Node and add "a" to it
   if (!root){
     root = new BTreeNode(t, true);
     root->setKeys(0, a);
@@ -30,15 +30,15 @@ void BTree::insert(int a){
     //Set root as one of new_root childs (child_1)
     new_root->setChilds(0, root);
     //Split root to child_1 and child_2 and make new_root their parents
-    new_root = split(new_root, 0, root);
+    split(new_root, 0, root);
 
-    //Find out where we should add a
+    //Find out where we should add "a"
     int i = 0;
     if (new_root->getKeys(0) < a)
       i++;
 
-    //Add a to its correct place
-    
+    //Add "a" to its correct place
+    int i = new_root->getN();
 
     //Set new_root as root
     root = new_root;
@@ -48,7 +48,7 @@ void BTree::insert(int a){
 
 }
 
-BTreeNode *BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
+void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
 
   //Create a new child node called child_2 and set its values to right of child_1 values
   BTreeNode *child_2 = new BTreeNode(t, child_1->getLeaf());
@@ -78,6 +78,4 @@ BTreeNode *BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
 
   //Increase new_root full places one number
   new_root->setN(new_root->getN() + 1);
-
-  return new_root;
 }
