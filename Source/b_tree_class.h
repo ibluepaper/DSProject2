@@ -11,7 +11,7 @@ public:
     root = nullptr;
   }
   void insert(int a);
-  void insert_non_full(BTreeNode *new_root, int a);
+  void insert_non_full(BTreeNode *child, int a);
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
 };
 
@@ -39,7 +39,7 @@ void BTree::insert(int a){
       i++;
 
     //Add "a" to the child
-    insert_non_full(new_root->getChilds[i], a);
+    insert_non_full(new_root->getChilds(i), a);
 
     //Set new_root as root
     root = new_root;
@@ -57,7 +57,7 @@ void BTree::insert_non_full(BTreeNode *child, int a){
   //If the child is leaf add "a" to the correct place in child
   if (child->getLeaf()){
     //Shift keys to right of array till "a" is in right place
-    for (; i >= 0 && child->getKeys[i] > a; i--)
+    for (; i >= 0 && child->getKeys(i) > a; i--)
       child->setKeys(i + 1, child->getKeys(i));
     //Add "a"
     child->setKeys(i + 1, a);
@@ -67,7 +67,7 @@ void BTree::insert_non_full(BTreeNode *child, int a){
   //If the child is not leaf
   else{
     //Find the child to add "a" in it
-    for (; i >= 0 && child->getKeys[i] > a; i--);
+    for (; i >= 0 && child->getKeys(i) > a; i--);
 
     //If the found child is full split it
     if (child->getChilds(i + 1)->getN() == 2 * t - 1){
@@ -94,7 +94,7 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   child_1->setN(t - 1);
 
   //Find the right place for the child_2 in new_root
-  for (int j = new_root->getN(), j >= i + 1; j--)
+  for (int j = new_root->getN(); j >= i + 1; j--)
     new_root->setChilds(j + 1, new_root->getChilds(j));
 
   //Add child_2 in new_root
