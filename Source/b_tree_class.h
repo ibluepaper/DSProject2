@@ -64,6 +64,19 @@ void BTree::insert_non_full(BTreeNode *child, int a){
     //Increase "n" one number
     child->setN(child->getN() + 1);
   }
+  //If the child is not leaf
+  else{
+    //Find the child to add "a" in it
+    for (; i >= 0 && child->getKeys[i] > a; i--);
+
+    //If the found child is full split it
+    if (child->getChilds(i + 1)->getN() == 2 * t - 1){
+      split(child, i+1, child->getChilds(i + 1));
+      if(child->getKeys(i + 1) > a)
+        i++;
+    }
+    insert_non_full(child->getChilds(i + 1), a);
+  }
 }
 
 void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
