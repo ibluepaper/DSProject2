@@ -4,7 +4,6 @@ using namespace std;
 
 class BTreeNode{
 private:
-  int t;
   int n;
   int *keys;
   BTreeNode **childs;
@@ -12,7 +11,6 @@ private:
 
 public:
   BTreeNode(int t, bool leaf){
-    this->t = t;
     n = 0;
     keys = new int[2 * t - 1];
     childs = new BTreeNode *[2 * t];
