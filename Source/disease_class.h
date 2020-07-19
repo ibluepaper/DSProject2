@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class DiseaseNode{
+class Disease{
 private:
   int symptom;
   string disease;
