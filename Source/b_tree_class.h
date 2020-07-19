@@ -13,6 +13,10 @@ public:
   void insert(int a);
   void insert_non_full(BTreeNode *child, int a);
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
+  //Get root just for test
+  BTreeNode *getRoot(){
+    return root;
+  }
 };
 
 void BTree::insert(int a){
