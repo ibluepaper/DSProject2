@@ -6,9 +6,12 @@ private:
   BTreeNode *root;
 
 public:
-  BTree(int t){
+  BTree(int t = 0){
     this->t = t;
     root = nullptr;
+  }
+  void setT(int t){
+    this->t = t;
   }
   void insert(int a);
   void insert_non_full(BTreeNode *child, int a);
