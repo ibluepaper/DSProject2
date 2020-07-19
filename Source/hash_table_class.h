@@ -2,17 +2,15 @@
 
 class HashTable{
 private:
-  int t; //for b-tree class
   int size;
-  BTree *hash_nodes;
+  BTree **hash_nodes;
 
 public:
   HashTable(int size, int t){
     this->size = size;
-    this->t = t;
-    hash_nodes = new BTree[size];
+    hash_nodes = new BTree*[size];
     for(int i = 0; i < size; i++)
-      hash_nodes[i].setT(t);
+      hash_nodes[i] = new BTree(t);
   }
 
   int hashFunction(int a){
@@ -21,7 +19,7 @@ public:
 
   void addData(Disease *disease){
     int hash_index = hashFunction(disease->getSymptom());
-    BTree[hash_index].insert(disease);
+    hash_nodes[hash_index]->insert(disease);
   }
 
 };

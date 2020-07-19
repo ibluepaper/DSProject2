@@ -6,17 +6,19 @@ private:
   BTreeNode *root;
 
 public:
-  BTree(int t = 0){
+  BTree(int t){
     this->t = t;
     root = nullptr;
   }
-  void setT(int t){
-    this->t = t;
-  }
+
   void insert(Disease *key);
+
   void insert_non_full(BTreeNode *child, Disease *key);
+
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
+
   BTreeNode *search(Disease *key, BTreeNode *node);
+  
   //Get root just for test
   BTreeNode *getRoot(){
     return root;
@@ -82,7 +84,7 @@ void BTree::insert_non_full(BTreeNode *child, Disease *key){
       if(child->getKeys(i + 1)->getSymptom() > key->getSymptom())
         i++;
     }
-    insert_non_full(child->getChilds(i + 1), a);
+    insert_non_full(child->getChilds(i + 1), key);
   }
 }
 

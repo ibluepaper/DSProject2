@@ -9,7 +9,7 @@ private:
   string medication;
 
 public:
-  DiseaseNode(int symptom, string disease, string medication){
+  Disease(int symptom, string disease, string medication){
     this->symptom = symptom;
     this->disease = disease;
     this->medication = medication;
