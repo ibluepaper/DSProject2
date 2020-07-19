@@ -2,17 +2,23 @@
 
 using namespace std;
 
+struct DiseaseNode{
+  int symptom;
+  string disease;
+  string medication;
+};
+
 class BTreeNode{
 private:
   int n;
-  int *keys;
+  DiseaseNode *keys;
   BTreeNode **childs;
   bool leaf;
 
 public:
   BTreeNode(int t, bool leaf){
     n = 0;
-    keys = new int[2 * t - 1];
+    keys = new DiseaseNode[2 * t - 1];
     childs = new BTreeNode *[2 * t];
     this->leaf = leaf;
   }
@@ -20,8 +26,10 @@ public:
   void setN(int n){
     this->n = n;
   }
-  void setKeys(int index, int a){
-    keys[index] = a;
+  void setKeys(int index, int symptom, string disease, string medication){
+    keys[index].symptom = symptom;
+    keys[index].disease = disease;
+    keys[index].medication = medication;
   }
   void setChilds(int index, BTreeNode *child){
     childs[index] = child;
@@ -33,9 +41,11 @@ public:
   int getN(){
     return n;
   }
+  //-------------->
   int getKeys(int index){
     return keys[index];
   }
+  //-------------->
   BTreeNode *getChilds(int index){
     return childs[index];
   }
