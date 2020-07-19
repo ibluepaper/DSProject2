@@ -52,7 +52,6 @@ void BTree::insert(int a){
   //If root is not full add a to the root in right place
   else
     insert_non_full(root, a);
-
 }
 
 void BTree::insert_non_full(BTreeNode *child, int a){
@@ -85,7 +84,6 @@ void BTree::insert_non_full(BTreeNode *child, int a){
 }
 
 void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
-
   //Create a new child node called child_2 and set its values to right of child_1 values
   BTreeNode *child_2 = new BTreeNode(t, child_1->getLeaf());
   child_2->setN(t - 1);
@@ -114,7 +112,6 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
 
   //Increase new_root full places one number
   new_root->setN(new_root->getN() + 1);
-
 }
 
 BTreeNode *BTree::search(int a, BTreeNode *node){
