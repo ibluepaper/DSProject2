@@ -14,13 +14,14 @@ public:
     for(int i = 0; i < size; i++)
       hash_nodes[i].setT(t);
   }
+
   int hashFunction(int a){
     return a % size;
   }
-  void addData(int a){
-    int hash_index = hashFunction(a);
-    BTree[hash_index].insert(a);
-  }
 
+  void addData(Disease *disease){
+    int hash_index = hashFunction(disease->getSymptom());
+    BTree[hash_index].insert(disease);
+  }
 
 };
