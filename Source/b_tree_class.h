@@ -13,21 +13,21 @@ public:
   void setT(int t){
     this->t = t;
   }
-  void insert(int a);
-  void insert_non_full(BTreeNode *child, int a);
+  void insert(Disease *key);
+  void insert_non_full(BTreeNode *child, Disease *key);
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
-  BTreeNode *search(int a, BTreeNode *node);
+  BTreeNode *search(Disease *key, BTreeNode *node);
   //Get root just for test
   BTreeNode *getRoot(){
     return root;
   }
 };
 
-void BTree::insert(int a){
-  //If tree is Empty add new Node and add "a" to it
+void BTree::insert(Disease *key){
+  //If tree is Empty add new Node and add "key" to it
   if (!root){
     root = new BTreeNode(t, true);
-    root->setKeys(0, a);
+    root->setKeys(0, key);
     root->setN(1);
     return;
   }
@@ -41,45 +41,45 @@ void BTree::insert(int a){
     //Split root to child_1 and child_2 and make new_root their parents
     split(new_root, 0, root);
 
-    //Find out which child of new_root should add "a"
+    //Find out which child of new_root should add "key"
     int i = 0;
-    if (new_root->getKeys(0) < a)
+    if (new_root->getKeys(0)->getSymptom() < key->getSymptom())
       i++;
 
-    //Add "a" to the child
-    insert_non_full(new_root->getChilds(i), a);
+    //Add "key" to the child
+    insert_non_full(new_root->getChilds(i), key);
 
     //Set new_root as root
     root = new_root;
   }
-  //If root is not full add a to the root in right place
+  //If root is not full add key to the root in right place
   else
-    insert_non_full(root, a);
+    insert_non_full(root, key);
 }
 
-void BTree::insert_non_full(BTreeNode *child, int a){
+void BTree::insert_non_full(BTreeNode *child, Disease *key){
   //Set last element place as "i"
   int i = child->getN() - 1;
 
-  //If the child is leaf add "a" to the correct place in child
+  //If the child is leaf add "key" to the correct place in child
   if (child->getLeaf()){
-    //Shift keys to right of array till "a" is in right place
-    for (; i >= 0 && child->getKeys(i) > a; i--)
+    //Shift keys to right of array till "key" is in right place
+    for (; i >= 0 && child->getKeys(i)->getSymptom() > key->getSymptom(); i--)
       child->setKeys(i + 1, child->getKeys(i));
-    //Add "a"
-    child->setKeys(i + 1, a);
+    //Add "key"
+    child->setKeys(i + 1, key);
     //Increase "n" one number
     child->setN(child->getN() + 1);
   }
   //If the child is not leaf
   else{
-    //Find the child to add "a" in it
-    for (; i >= 0 && child->getKeys(i) > a; i--);
+    //Find the child to add "key" in it
+    for (; i >= 0 && child->getKeys(i)->getSymptom() > key->getSymptom(); i--);
 
     //If the found child is full split it
     if (child->getChilds(i + 1)->getN() == 2 * t - 1){
       split(child, i+1, child->getChilds(i + 1));
-      if(child->getKeys(i + 1) > a)
+      if(child->getKeys(i + 1)->getSymptom() > key->getSymptom())
         i++;
     }
     insert_non_full(child->getChilds(i + 1), a);
@@ -117,19 +117,19 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   new_root->setN(new_root->getN() + 1);
 }
 
-BTreeNode *BTree::search(int a, BTreeNode *node){
-  //Find the place of "a" in this node
+BTreeNode *BTree::search(Disease *key, BTreeNode *node){
+  //Find the place of "key" in this node
   int i = 0;
-  for(; i < node->getN() && a > node->getKeys(i); i++);
+  for(; i < node->getN() && key->getSymptom() > node->getKeys(i)->getSymptom(); i++);
 
-  //Return this node if "a" is here
-  if (node->getKeys(i) == a)
+  //Return this node if "key" is here
+  if (node->getKeys(i)->getSymptom() == key->getSymptom())
     return node;
 
-  //Return nullptr if "a" is not here and this node is leaf
+  //Return nullptr if "key" is not here and this node is leaf
   if (node->getLeaf())
     return nullptr;
 
   //Return recursive function for this node's correct child
-  return search(a, node->getChilds(i));
+  return search(key, node->getChilds(i));
 }
