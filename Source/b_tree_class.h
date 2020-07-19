@@ -13,7 +13,7 @@ public:
   void insert(int a);
   void insert_non_full(BTreeNode *child, int a);
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
-  BTreeNode *search(BTreeNode *node, int a);
+  BTreeNode *search(int a, BTreeNode *node);
   //Get root just for test
   BTreeNode *getRoot(){
     return root;
@@ -117,19 +117,19 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
 
 }
 
-BTreeNode *BTree::search(BTreeNode *node, int a){
+BTreeNode *BTree::search(int a, BTreeNode *node){
   //Find the place of "a" in this node
   int i = 0;
-  for(; i < root->getN() && a > root->getKeys(i); i++);
+  for(; i < node->getN() && a > node->getKeys(i); i++);
 
   //Return this node if "a" is here
-  if (root->getKeys(i) == a)
+  if (node->getKeys(i) == a)
     return node;
 
   //Return nullptr if "a" is not here and this node is leaf
-  if (root->getLeaf())
+  if (node->getLeaf())
     return nullptr;
 
   //Return recursive function for this node's correct child
-  return search(node->getChilds(i), a);
+  return search(a, node->getChilds(i));
 }
