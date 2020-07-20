@@ -60,6 +60,10 @@ void addDisease(HashTable *disease_hash){
 
   cout << "- Enter Symptom: ";
   cin >> symptom;
+  if (disease_hash->search(stringToInt(symptom))){
+    cout << "\n* Symptom is available in database; To change, try remove it and add it again." << endl;
+    return;
+  }
   cout << "- Enter Disease: ";
   cin >> disease;
   cout << "- Enter Medication: ";
