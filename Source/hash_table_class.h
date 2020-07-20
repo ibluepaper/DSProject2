@@ -22,12 +22,9 @@ public:
     hash_nodes[hash_index]->insert(disease);
   }
 
-  /*Disease *search(int symptom){
-    Disease *disease_node;
-    hash_nodes[hashFunction(symptom)] ;
-
-
-    return disease_node;
-  }*/
+  Disease *search(int symptom){
+    BTreeNode *disease_node = hash_nodes[hashFunction(symptom)]->search(symptom, hash_nodes[hashFunction(symptom)]->getRoot());
+    return disease_node->search(symptom);
+  }
 
 };
