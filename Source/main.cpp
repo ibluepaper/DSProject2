@@ -6,8 +6,10 @@ void addDisease(HashTable *disease_hash, string symptom, string disease, string 
 Disease *searchDisease(HashTable *disease_hash, string symptom);
 
 int main(){
-
-
+  /*HashTable *disease_hash = new HashTable(5, 3);
+  addDisease(disease_hash, "Headache", "Synozit", "Morphin");
+  addDisease(disease_hash, "Backache", "Disk", "Rest");
+  cout << searchDisease(disease_hash, "Headache")->getMedication() << endl;*/
 }
 
 
