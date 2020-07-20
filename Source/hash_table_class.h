@@ -23,8 +23,12 @@ public:
   }
 
   Disease *search(int symptom){
-    BTreeNode *disease_node = hash_nodes[hashFunction(symptom)]->search(symptom, hash_nodes[hashFunction(symptom)]->getRoot());
-    return disease_node->search(symptom);
+    BTreeNode *disease_node = nullptr;
+    if (hash_nodes[hashFunction(symptom)]->getRoot())
+      disease_node = hash_nodes[hashFunction(symptom)]->search(symptom, hash_nodes[hashFunction(symptom)]->getRoot());
+    if (disease_node)
+      return disease_node->search(symptom);
+    return nullptr;
   }
 
 };
