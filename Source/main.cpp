@@ -1,6 +1,15 @@
 #include "hash_table_class.h"
 #include <string>
 
+int stringToInt(string str);
+void addDisease(HashTable *disease_hash, strign symptom, string disease, string medication);
+
+int main(){
+
+
+}
+
+
 int stringToInt(string str){
     int len = str.size();
     int sum = 0;
@@ -9,7 +18,7 @@ int stringToInt(string str){
     return sum;
 }
 
-int main(){
-  
-
+void addDisease(HashTable *disease_hash, string symptom, string disease, string medication){
+  Disease *disease_node = new Disease(stringToInt(symptom), disease, medication);
+  disease_hash->addData(disease_node);
 }
