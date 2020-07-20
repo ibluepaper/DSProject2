@@ -17,8 +17,8 @@ public:
 
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
 
-  BTreeNode *search(Disease *key, BTreeNode *node);
-  
+  BTreeNode *search(int key, BTreeNode *node);
+
   //Get root just for test
   BTreeNode *getRoot(){
     return root;
@@ -119,13 +119,13 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   new_root->setN(new_root->getN() + 1);
 }
 
-BTreeNode *BTree::search(Disease *key, BTreeNode *node){
+BTreeNode *BTree::search(int key, BTreeNode *node){
   //Find the place of "key" in this node
   int i = 0;
-  for(; i < node->getN() && key->getSymptom() > node->getKeys(i)->getSymptom(); i++);
+  for(; i < node->getN() && key > node->getKeys(i)->getSymptom(); i++);
 
   //Return this node if "key" is here
-  if (node->getKeys(i)->getSymptom() == key->getSymptom())
+  if (node->getKeys(i)->getSymptom() == key)
     return node;
 
   //Return nullptr if "key" is not here and this node is leaf
