@@ -22,4 +22,12 @@ public:
     hash_nodes[hash_index]->insert(disease);
   }
 
+  /*Disease *search(int symptom){
+    Disease *disease_node;
+    hash_nodes[hashFunction(symptom)] ;
+
+
+    return disease_node;
+  }*/
+
 };
