@@ -4,12 +4,17 @@
 int stringToInt(string str);
 void addDisease(HashTable *disease_hash, string symptom, string disease, string medication);
 Disease *searchDisease(HashTable *disease_hash, string symptom);
+void removeDisease(HashTable *disease_hash, string symptom);
+void printMainMenu();
 
 int main(){
-  /*HashTable *disease_hash = new HashTable(5, 3);
-  addDisease(disease_hash, "Headache", "Synozit", "Morphin");
-  addDisease(disease_hash, "Backache", "Disk", "Rest");
-  cout << searchDisease(disease_hash, "Headache")->getMedication() << endl;*/
+  int hash_size, b_tree_degree;
+  cout << "Enter hash table size: ";
+  cin >> hash_size;
+  cout << "Now enter b-tree minimum degree: ";
+  cin >> b_tree_degree;
+
+
 }
 
 
@@ -28,4 +33,19 @@ void addDisease(HashTable *disease_hash, string symptom, string disease, string 
 
 Disease *searchDisease(HashTable *disease_hash, string symptom){
   return disease_hash->search(stringToInt(symptom));
+}
+
+
+void removeDisease(HashTable *disease_hash, string symptom){
+  return disease_hash->removeData(stringToInt(symptom));
+}
+
+void printMainMenu(){
+  cout << endl << "|:==== Doctors Unemployment ====:|" << endl << endl
+      << "1. Add Disease" << endl
+      << "2. Remove Disease" << endl
+      << "3. Search Disease" << endl
+      << endl;
+
+  cout << "Please enter the command number (1 - 3): ";
 }
