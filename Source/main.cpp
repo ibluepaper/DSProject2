@@ -6,6 +6,7 @@ void addDisease(HashTable *disease_hash);
 void searchDisease(HashTable *disease_hash);
 void removeDisease(HashTable *disease_hash);
 void printMainMenu();
+void continueFunction();
 
 int main(){
   int hash_size, b_tree_degree;
@@ -24,20 +25,24 @@ int main(){
     switch (command_number) {
       case 1:
         addDisease(disease_hash);
+        continueFunction();
       break;
       case 2:
         removeDisease(disease_hash);
+        continueFunction();
       break;
       case 3:
         searchDisease(disease_hash);
+        continueFunction();
       break;
       case 4:
         return 0;
       break;
       default:
-        cout << "Wrong input; Try again..." << endl << endl;
+        cout << "\nWrong input; Try again..." << endl << endl;
       break;
     }
+
   } while(1);
 }
 
@@ -63,7 +68,7 @@ void addDisease(HashTable *disease_hash){
   Disease *disease_node = new Disease(stringToInt(symptom), disease, medication);
   disease_hash->addData(disease_node);
 
-  cout << "* Disease added successfully." << endl;
+  cout << "\n* Disease added successfully." << endl;
 }
 
 void searchDisease(HashTable *disease_hash){
@@ -74,7 +79,12 @@ void searchDisease(HashTable *disease_hash){
 
   Disease *disease = disease_hash->search(stringToInt(symptom));
 
-  cout << "* Disease with this symptom is \" " << disease->getDisease() << " \" "
+  if (!disease){
+    cout << "\n* Disease not found :/" << endl;
+    return;
+  }
+
+  cout << "\n* Disease with this symptom is \" " << disease->getDisease() << " \" "
       << "and medication for this disease is \" " << disease->getMedication() << " \"."
       << endl << endl << endl;
 }
@@ -88,7 +98,7 @@ void removeDisease(HashTable *disease_hash){
 
   //disease_hash->removeData(stringToInt(symptom));
 
-  cout << "* Disease removed successfully." << endl;
+  cout << "\n* Disease removed successfully." << endl;
 }
 
 void printMainMenu(){
@@ -99,5 +109,15 @@ void printMainMenu(){
       << "4. Exit" << endl
       << endl;
 
-  cout << "Please enter the command number (1 - 3): ";
+  cout << "Please enter the command number (1 - 4): ";
+}
+
+void continueFunction(){
+  cout << endl << "Enter 1 to continue: ";
+  string str;
+  cin >> str;
+  while (str != "1"){
+    cout << "Wrong input; Try again: ";
+    cin >> str;
+  }
 }
