@@ -46,4 +46,11 @@ public:
   bool getLeaf(){
     return leaf;
   }
+
+  Disease *search(int symptom){
+    for (int i = 0; i < n; i++)
+      if (keys[i]->getSymptom() == symptom)
+        return keys[i];
+    return nullptr;
+  }
 };
