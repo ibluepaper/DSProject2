@@ -22,6 +22,10 @@ public:
     hash_nodes[hash_index]->insert(disease);
   }
 
+  void removeData(int symptom){
+    hash_nodes[hashFunction(symptom)]->remove(symptom);
+  }
+
   Disease *search(int symptom){
     BTreeNode *disease_node = nullptr;
     if (hash_nodes[hashFunction(symptom)]->getRoot())
@@ -30,5 +34,4 @@ public:
       return disease_node->search(symptom);
     return nullptr;
   }
-
 };
