@@ -99,12 +99,49 @@ public:
       else
         childs[index]->removeKey(symptom);
     }
-
   }
+
+  //a function that remove index-th keys in this node - that is leaf
   void removeFromLeaf(int index){
+    for (int i = index + 1; i < n; i++)
+      keys[i - 1] = keys[i];
+    n--;
+  }
+
+  //a function that remove index-th keys in this node - that is not leaf
+  //there is 3 states:
+  //1. left child has t or more than t keys --> call getL()
+  //2. right child has t or more than t keys --> call getR()
+  //3. both have less than t childs --> call merge()
+  void removeFromNonLeaf(int index){
+
+    if (childs[index]->getN() >= t){
+      Disease *l = getL(index);
+      keys[index] = l;
+      childs[index]->removeKey(keys[index]->getSymptom());
+    }
+
+    else if (childs[index + 1]->getN() >= t){
+      Disease *r = getR(index);
+      keys[index] = r;
+      childs[index + 1]->removeKey(keys[index]->getSymptom());
+    }
+
+    else {
+      merge(index);
+      childs[index]->remove(symptom);
+    }
+  }
+
+  Disease *getL(int index){
 
   }
-  void removeFromNonLeaf(int index){
+
+  Disease *getR(int index){
+
+  }
+
+  int merge(int index){
 
   }
 };
