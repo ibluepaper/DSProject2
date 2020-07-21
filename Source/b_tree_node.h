@@ -75,6 +75,7 @@ public:
       else
         removeFromNonLeaf(index);
     }
+
     //if symptom key is not available is this node; there is two state
     //1. this node is leaf ->>> so it means key is not available in this tree
     //2. the key is in the sub-tree rooted from this node
@@ -114,6 +115,7 @@ public:
   //2. right child has t or more than t keys --> call getR()
   //3. both have less than t childs --> call merge()
   void removeFromNonLeaf(int index){
+    int symptom = keys[index]->getSymptom();
 
     if (childs[index]->getN() >= t){
       Disease *l = getL(index);
@@ -129,19 +131,31 @@ public:
 
     else {
       merge(index);
-      childs[index]->remove(symptom);
+      childs[index]->removeKey(symptom);
     }
   }
 
+  //a function that return the right most node key that is in the left child of a key
   Disease *getL(int index){
-
+    BTreeNode *current = childs[index];
+    while (!current->getLeaf())
+      current = current->getChilds(current->getN());
+    return current->getKeys(current->getN() - 1);
   }
 
+  //a function that return the left most node key that is in the right child of a key
   Disease *getR(int index){
-
+    BTreeNode *current = childs[index];
+    while (!current->getLeaf())
+      current = current->getChilds(0);
+    return current->getKeys(0);
   }
 
   int merge(int index){
+
+  }
+
+  void fill(int index){
 
   }
 };
