@@ -139,11 +139,12 @@ BTreeNode *BTree::search(int key, BTreeNode *node){
 
 void BTree::remove(int symptom){
   if (!root){
-    cout << "Database is empty." << endl;
+    cout << "\n* This symptom not found in the database." << endl;
     return;
   }
 
-  root->removeKey(symptom);
+  if (root->removeKey(symptom))
+    cout << "\n* Disease removed successfully." << endl;
 
   //if root node has no keys there will 2 state:
   //1. set its first child as root

@@ -65,7 +65,7 @@ public:
   }
 
   //remove function to remove a disease key in this node
-  void removeKey(int symptom){
+  bool removeKey(int symptom){
     int index = findKey(symptom);
 
     //if symptom key is available in this node; there is two state {1. this node is leaf 2. this node isn't leaf}
@@ -81,8 +81,8 @@ public:
     //2. the key is in the sub-tree rooted from this node
     else {
       if (leaf){
-        cout << "This symptom not found in the database." << endl;
-        return;
+        cout << "\n* This symptom not found in the database." << endl;
+        return false;
       }
 
       //this boolian store if the symptom is in the last child node of this node or not
@@ -100,6 +100,7 @@ public:
       else
         childs[index]->removeKey(symptom);
     }
+    return true;
   }
 
   //a function that remove index-th keys in this node - that is leaf

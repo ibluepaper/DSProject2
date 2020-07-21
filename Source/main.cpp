@@ -101,8 +101,6 @@ void removeDisease(HashTable *disease_hash){
   cin >> symptom;
 
   disease_hash->removeData(stringToInt(symptom));
-
-  cout << "\n* Disease removed successfully." << endl;
 }
 
 void printMainMenu(){
