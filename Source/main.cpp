@@ -100,7 +100,7 @@ void removeDisease(HashTable *disease_hash){
   cout << "- Enter Symptom to remove: ";
   cin >> symptom;
 
-  //disease_hash->removeData(stringToInt(symptom));
+  disease_hash->removeData(stringToInt(symptom));
 
   cout << "\n* Disease removed successfully." << endl;
 }
