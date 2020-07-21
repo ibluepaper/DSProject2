@@ -205,7 +205,30 @@ public:
 
   //a function that borrow a key from childs[index + 1] and add it to child[index]
   void borrowFromNext(int index){
+    BTreeNode *child = childs[index];
+    BTreeNode *next_child = childs[index + 1];
 
+    //the first key of next_child replace with the index key
+    //and index key will add at last of child
+
+    //set child's last key to this current node key
+    child->setKeys(child->getN(), keys[index]);
+
+    //set current node key to first next_child's key
+    keys[index] = next_child->getKeys(0);
+
+    //shift all next_child's keys one left
+    for (int i = 1; i < next_child->getN(); i++)
+      next_child->setKeys(i - 1, next_child->getKeys(i));
+
+    //if next_child isn't leaf shifting all its childs one left
+    if (!next_child->getLeaf()){
+      for (int i = 1; i <= next_child->getN(); i++)
+        next_child->setChilds(i - 1, next_child->getChilds(i));
+    }
+
+    child->setN(child->getN() + 1);
+    next_child->setN(child->getN() - 1);
   }
 
   int merge(int index){
