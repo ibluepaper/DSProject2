@@ -231,7 +231,33 @@ public:
     next_child->setN(child->getN() - 1);
   }
 
-  int merge(int index){
+  //a function to merge childs[index] with childs[index + 1] and free up childs[index + 1]
+  void merge(int index){
+    BTreeNode *child = childs[index];
+    BTreeNode *next_child = childs[index + 1];
 
+    //add the key that is between child and next_child to end of child
+    child->setKeys(t - 1, keys[index]);
+
+    //copy keys from next_child to end of child
+    for (int i = 0; i < next_child->getN(); i++)
+      child->setKeys(i + t, next_child->getKeys(i));
+
+    //copy childs from next_child to end of child if child isn't leaf
+    if (!child->getLeaf()){
+      for (int i = 0; i <= next_child->getN(); i++)
+        child->setChilds(i + t, next_child->getChilds(i));
+    }
+
+    //shift all keys and childs after index one left to fill the empty place
+    for (int i = index + 1; i < n; i++)
+      keys[i - 1] = keys[i];
+    for (int i = index + 1; i <= n; i++)
+      childs[i - 1] = childs[i];
+
+    child->setN(child->getN() + next_child->getN() + 1);
+    n--;
+
+    delete next_child;
   }
 };
