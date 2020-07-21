@@ -19,10 +19,11 @@ public:
 
   BTreeNode *search(int key, BTreeNode *node);
 
-  //Get root just for test
   BTreeNode *getRoot(){
     return root;
   }
+
+  void remove(int symptom);
 };
 
 void BTree::insert(Disease *key){
@@ -134,4 +135,25 @@ BTreeNode *BTree::search(int key, BTreeNode *node){
 
   //Return recursive function for this node's correct child
   return search(key, node->getChilds(i));
+}
+
+void BTree::remove(int symptom){
+  if (!root){
+    cout << "Database is empty." << endl;
+    return;
+  }
+
+  root->removeKey(symptom);
+
+  //if root node has no keys there will 2 state:
+  //1. set its first child as root
+  //2. set it nullptr if it has no child
+  if (root->getN() == 0){
+    BTreeNode *tmp = root;
+    if (root->getLeaf())
+      root = nullptr;
+    else
+      root = root->getChilds(0);
+    delete tmp;
+  }
 }
