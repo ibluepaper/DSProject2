@@ -151,11 +151,34 @@ public:
     return current->getKeys(0);
   }
 
-  int merge(int index){
+  //a function to fill a child that has less than t keys
+  //this function has 3 states
+  void fill(int index){
+    //if previous child has more than t keys borrow one from that
+    if (index != 0 && childs[index - 1]->getN() >= t)
+      borrowFromPrev(index);
+
+    //if next child has more than t keys borrow one from that
+    if (index != n && childs[index + 1]->getN() >= t)
+      borrowFromNext(index);
+
+    //else merge it with the next child and if its last child in this node merge it with previous child
+    else {
+      if (index != n)
+        merge(index);
+      else
+        merge(index - 1);
+    }
+  }
+  void borrowFromPrev(int index){
 
   }
 
-  void fill(int index){
+  void borrowFromNext(int index){
+
+  }
+
+  int merge(int index){
 
   }
 };
