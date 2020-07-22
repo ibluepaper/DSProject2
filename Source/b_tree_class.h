@@ -17,7 +17,7 @@ public:
 
   void split(BTreeNode *new_root, int i, BTreeNode *child_1);
 
-  BTreeNode *search(int key, BTreeNode *node);
+  BTreeNode *search(int key, BTreeNode *node, bool even);
 
   BTreeNode *getRoot(){
     return root;
@@ -122,13 +122,17 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   new_root->setN(new_root->getN() + 1);
 }
 
-BTreeNode *BTree::search(int key, BTreeNode *node){
+BTreeNode *BTree::search(int key, BTreeNode *node, bool even = true){
   //Find the place of "key" in this node
   int i = 0;
-  for(; i < node->getN() && key > node->getKeys(i)->getSymptom(); i++);
+  if (even)
+    for(; i < node->getN() && key > node->getKeys(i)->getSymptom(); i++);
+  else
+    for(; i < node->getN() && key < node->getKeys(i)->getSymptom(); i++);
 
   if(!node->getKeys(i))
     return nullptr;
+
   //Return this node if "key" is here
   if (node->getKeys(i)->getSymptom() == key)
     return node;
@@ -138,7 +142,7 @@ BTreeNode *BTree::search(int key, BTreeNode *node){
     return nullptr;
 
   //Return recursive function for this node's correct child
-  return search(key, node->getChilds(i));
+  return search(key, node->getChilds(i), !even);
 }
 
 void BTree::remove(int symptom){
