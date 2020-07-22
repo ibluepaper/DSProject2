@@ -273,7 +273,7 @@ public:
       for (int start = 0, end = n; start < end; start++, end--){
         BTreeNode *tmp = childs[start];
         childs[start] = childs[end];
-        childs[end] = tmp
+        childs[end] = tmp;
       }
   }
 };

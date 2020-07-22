@@ -25,7 +25,7 @@ public:
 
   void remove(int symptom);
 
-  void bTreeEvenOddSort(BTreeNode *current = root, bool even = true);
+  void bTreeEvenOddSort(BTreeNode *current, bool even);
 };
 
 void BTree::insert(Disease *key){
@@ -163,7 +163,9 @@ void BTree::remove(int symptom){
   }
 }
 
-void BTree::bTreeEvenOddSort(BTreeNode *current = root, bool even = true){
+void BTree::bTreeEvenOddSort(BTreeNode *current = nullptr, bool even = true){
+  if (!current)
+    current = root;
   if (!current)
     return;
 
