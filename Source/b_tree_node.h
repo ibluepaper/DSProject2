@@ -261,4 +261,19 @@ public:
 
     delete next_child;
   }
+
+  void reverseKeysAndChilds(){
+    for (int start = 0, end = n - 1; start < end; start++, end--){
+      Disease *tmp = keys[start];
+      keys[start] = keys[end];
+      keys[end] = tmp;
+    }
+
+    if (!leaf)
+      for (int start = 0, end = n; start < end; start++, end--){
+        BTreeNode *tmp = childs[start];
+        childs[start] = childs[end];
+        childs[end] = tmp
+      }
+  }
 };
