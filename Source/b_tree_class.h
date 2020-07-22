@@ -24,6 +24,10 @@ public:
   }
 
   void remove(int symptom);
+
+  void bTreeEvenOddSort(BTree *current = root, bool even = true);
+
+  void reverseKeysAndChilds(BTree *current);
 };
 
 void BTree::insert(Disease *key){
@@ -159,4 +163,22 @@ void BTree::remove(int symptom){
       root = root->getChilds(0);
     delete tmp;
   }
+}
+
+void BTree::bTreeEvenOddSort(BTree *current = root, bool even = true){
+  if (!current)
+    return;
+
+  if (!even)
+    reverseKeysAndChilds(current);
+
+  if (current->getLeaf())
+    return;
+
+  for (int i = 0; i < current->getN(); i++)
+    bTreeEvenOddSort(current->getChilds(i), !even);
+}
+
+void BTree::reverseKeysAndChilds(BTree *current){
+  
 }
