@@ -59,15 +59,20 @@ void addDisease(HashTable *disease_hash){
   string symptom, disease, medication;
 
   cout << "- Enter Symptom: ";
-  cin >> symptom;
+  //cin >> symptom;
+  string getline_problem;
+  getline(cin, getline_problem);
+  getline(cin, symptom);
   if (disease_hash->search(stringToInt(symptom))){
     cout << "\n* Symptom is available in database; To change, try remove it and add it again." << endl;
     return;
   }
   cout << "- Enter Disease: ";
-  cin >> disease;
+  //cin >> disease;
+  getline(cin, disease);
   cout << "- Enter Medication: ";
-  cin >> medication;
+  //cin >> medication;
+  getline(cin, medication);
 
   Disease *disease_node = new Disease(stringToInt(symptom), disease, medication);
   disease_hash->addData(disease_node);
@@ -79,7 +84,10 @@ void searchDisease(HashTable *disease_hash){
   string symptom;
 
   cout << "- Enter Symptom: ";
-  cin >> symptom;
+  //cin >> symptom;
+  string getline_problem;
+  getline(cin, getline_problem);
+  getline(cin, symptom);
 
   Disease *disease = disease_hash->search(stringToInt(symptom));
 
@@ -98,7 +106,10 @@ void removeDisease(HashTable *disease_hash){
   string symptom;
 
   cout << "- Enter Symptom to remove: ";
-  cin >> symptom;
+  //cin >> symptom;
+  string getline_problem;
+  getline(cin, getline_problem);
+  getline(cin, symptom);
 
   disease_hash->removeData(stringToInt(symptom));
 }
