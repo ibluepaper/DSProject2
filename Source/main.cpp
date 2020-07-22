@@ -27,22 +27,46 @@ int main(){
         addDisease(disease_hash);
         continueFunction();
       break;
+
       case '2':
         removeDisease(disease_hash);
         continueFunction();
       break;
+
       case '3':
+        disease_hash->evenOddSort();
         searchDisease(disease_hash);
         continueFunction();
+        while (1){
+          cout << "\n1. Search Disease" << endl
+              << "2. Exit" << endl << endl;
+          cout << "Please enter the command number (1 - 2): ";
+
+          cin >> command_number;
+          switch (command_number) {
+            case '1':
+              searchDisease(disease_hash);
+              continueFunction();
+            break;
+
+            case '2':
+              return 0;
+
+            default:
+              cout << "\nWrong input; Try again..." << endl << endl;
+            break;
+          }
+        }
       break;
+
       case '4':
         return 0;
       break;
+
       default:
         cout << "\nWrong input; Try again..." << endl << endl;
       break;
     }
-
   } while(1);
 }
 
