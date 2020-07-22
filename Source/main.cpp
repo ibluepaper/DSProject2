@@ -17,25 +17,25 @@ int main(){
 
   HashTable *disease_hash = new HashTable(hash_size, b_tree_degree);
 
-  int command_number;
+  char command_number;
 
   do {
     printMainMenu();
     cin >> command_number;
     switch (command_number) {
-      case 1:
+      case '1':
         addDisease(disease_hash);
         continueFunction();
       break;
-      case 2:
+      case '2':
         removeDisease(disease_hash);
         continueFunction();
       break;
-      case 3:
+      case '3':
         searchDisease(disease_hash);
         continueFunction();
       break;
-      case 4:
+      case '4':
         return 0;
       break;
       default:
