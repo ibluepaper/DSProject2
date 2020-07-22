@@ -34,7 +34,7 @@ void BTree::insert(Disease *key){
     root->setN(1);
     return;
   }
-  //If root root is full split it to two nodes and create new_root that points to these nodes
+  //If root is full split it into two nodes and create new_root that points to these nodes
   if(root->getN() == 2 * t - 1){
 
     //Create new node as the new_root that points to the splited nodes from root
@@ -125,6 +125,8 @@ BTreeNode *BTree::search(int key, BTreeNode *node){
   int i = 0;
   for(; i < node->getN() && key > node->getKeys(i)->getSymptom(); i++);
 
+  if(!node->getKeys(i))
+    return nullptr;
   //Return this node if "key" is here
   if (node->getKeys(i)->getSymptom() == key)
     return node;
