@@ -34,4 +34,9 @@ public:
       return disease_node->search(symptom);
     return nullptr;
   }
+
+  void evenOddSort(){
+    for (int i = 0; i < size; i++)
+      hash_nodes[i]->bTreeEvenOddSort();
+  }
 };
