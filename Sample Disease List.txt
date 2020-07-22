@@ -1,0 +1,45 @@
+1
+viral infection involving the upper respiratory tract
+Cold
+Benadryl
+1
+1
+Baldness
+Alopecia
+spironolactone
+1
+1
+Headache
+Migraine
+sumatriptan
+1
+1
+Inability to sleep
+Insomnia
+trazodone
+1
+1
+Overweight
+Obesity
+phentermine
+1
+1
+Shortness of breath
+COVID-19
+rest
+1
+1
+too little insulin
+Diabetes, Type 1
+Humalog
+1
+1
+Always feeling thirsty
+Diabetes, Type 2
+metformin
+1
+1
+High Cholesterol
+High Cholesterol
+atorvastatin
+1
