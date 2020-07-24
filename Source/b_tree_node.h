@@ -2,13 +2,14 @@
 
 class BTreeNode{
 private:
-  int t;
-  int n;
+  int t; //b-tree degree
+  int n; //number of keys that stored in this node
   Disease **keys;
   BTreeNode **childs;
-  bool leaf;
+  bool leaf; //true if this node is leaf
 
 public:
+  //get b-tree degree and create keys and childs arrays and set leaf
   BTreeNode(int t, bool leaf){
     this->t = t;
     n = 0;
@@ -21,34 +22,38 @@ public:
     this->n = n;
   }
 
-  void setKeys(int index, Disease *key){
-    keys[index] = key;
-  }
-
-  void setChilds(int index, BTreeNode *child){
-    childs[index] = child;
-  }
-
-  void setLeaf(bool leaf){
-    this->leaf = leaf;
-  }
-
   int getN(){
     return n;
+  }
+
+  //get index and disease object as key
+  void setKeys(int index, Disease *key){
+    keys[index] = key;
   }
 
   Disease *getKeys(int index){
     return keys[index];
   }
 
+  //get index and b-tree node object as child
+  void setChilds(int index, BTreeNode *child){
+    childs[index] = child;
+  }
+
   BTreeNode *getChilds(int index){
     return childs[index];
+  }
+
+  void setLeaf(bool leaf){
+    this->leaf = leaf;
   }
 
   bool getLeaf(){
     return leaf;
   }
 
+  //search symptom in the keys array and return disease object
+  //return nullptr if it's not found
   Disease *search(int symptom){
     for (int i = 0; i < n; i++)
       if (keys[i]->getSymptom() == symptom)
@@ -262,6 +267,8 @@ public:
     delete next_child;
   }
 
+  //revese keys and childs arrays
+  //it is used for odd and even sort
   void reverseKeysAndChilds(){
     for (int start = 0, end = n - 1; start < end; start++, end--){
       Disease *tmp = keys[start];

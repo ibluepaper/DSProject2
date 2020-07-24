@@ -2,7 +2,7 @@
 
 class BTree{
 private:
-  int t;
+  int t; //b-tree minimum degree
   BTreeNode *root;
 
 public:
@@ -28,6 +28,7 @@ public:
   void bTreeEvenOddSort(BTreeNode *current, bool even);
 };
 
+//add disease object to b-tree
 void BTree::insert(Disease *key){
   //If tree is Empty add new Node and add "key" to it
   if (!root){
@@ -62,6 +63,7 @@ void BTree::insert(Disease *key){
     insert_non_full(root, key);
 }
 
+//if a note is not full it will use this function to add key
 void BTree::insert_non_full(BTreeNode *child, Disease *key){
   //Set last element place as "i"
   int i = child->getN() - 1;
@@ -91,6 +93,7 @@ void BTree::insert_non_full(BTreeNode *child, Disease *key){
   }
 }
 
+//split a node into two nodes
 void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   //Create a new child node called child_2 and set its values to right of child_1 values
   BTreeNode *child_2 = new BTreeNode(t, child_1->getLeaf());
@@ -122,6 +125,9 @@ void BTree::split(BTreeNode *new_root, int i, BTreeNode *child_1){
   new_root->setN(new_root->getN() + 1);
 }
 
+//search a symptom in b-tree
+//it will return b-tree node that contain that symptom
+//return nullptr if it not found
 BTreeNode *BTree::search(int key, BTreeNode *node, bool even = true){
   //Find the place of "key" in this node
   int i = 0;
@@ -167,6 +173,7 @@ void BTree::remove(int symptom){
   }
 }
 
+// sort b-tree to even odd mode
 void BTree::bTreeEvenOddSort(BTreeNode *current = nullptr, bool even = true){
   if (!current)
     current = root;
